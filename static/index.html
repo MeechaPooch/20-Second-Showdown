@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <div class="colors">
+            <div id="team1" class="teamcolor"></div>
+            <div id="team2" class="teamcolor"></div>
+        </div>
+        <div class="content">
+            <div class="teamtext" id="team1text">
+                <div class="teamname">
+                    eagies
+                </div>
+                <div class="teamtime">
+                    <span class="t" id="t1s">12</span><span class="s">s</span>
+                </div>
+            </div>
+
+            <!-- <div></div> -->
+            <div class="task">
+                <!-- <img class="taskbubble" src="./yesbub.png" height="600" width="900"> -->
+                <div class="tasktext" id="tasktext"></div>
+            </div>
+
+            <div class="teamtext" id="team2text">
+                <div class="teamname">
+                    varcos
+                </div>
+                <div class="teamtime">
+                    <span class="t" id="t2s">12</span><span class="s">s</span>
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+    @font-face {
+        font-family: kmag;
+        src: url(fonts/Kids\ Magazine.ttf);
+    }
+    @font-face {
+        font-family: badaboom2;
+        src: url(fonts/KGHAPPY.ttf);
+    }
+    @font-face {
+        font-family: badaboomsolid;
+        src: url(fonts/KGHAPPYSolid.ttf);
+    }
+    @font-face {
+        font-family: badaboom;
+        src: url(fonts/FuturaHandwritten.ttf);
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,600;1,200&family=Comic+Neue:wght@400;700&display=swap');
+
+    .task{
+        display: flex;
+ 
+    }
+    .taskbubble{
+        
+    }
+    .tasktext{
+        padding:30px;
+        position:relative;
+        max-width:900px;
+        /* transform:  perspective(400px) rotateX(0deg) rotateY(-5deg) rotateZ(-5deg) ; */
+        background-color: white;
+        font-family: 'Comic Neue', cursive;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        outline:10px solid black;
+        border-radius: 20px;
+        /* animation: taskTeam1 reverse; */
+    }
+
+    @keyframes taskTeam1 { 
+        from{
+            transform: perspective(400px) rotateX(0deg) rotateY(5deg) rotateZ(1deg);
+        }
+        to{
+            transform: perspective(400px) rotateX(0deg) rotateY(-5deg) rotateZ(-5deg);
+        }
+    }
+
+    @keyframes taskTeam2 { 
+        to{
+            transform: perspective(400px) rotateX(0deg) rotateY(5deg) rotateZ(1deg);
+        }
+        from{
+            transform: perspective(400px) rotateX(0deg) rotateY(-5deg) rotateZ(-5deg);
+        }
+    }
+
+    .content{
+        gap:30px;
+        position: absolute;
+        top:50%;
+        left:50%;
+        display: flex;
+        transform: translate(-50%, -50%);
+        align-items: center;
+        width: 90%;
+        justify-content: center;
+    }
+    .teamtext{
+        display: flex;
+        flex-direction: column;
+        font-family: 'roboto';
+        /* font-family: 'Comic Neue', cursive; */
+        /* font-weight: bold; */
+        /* gap:-100px; */
+        align-items: center;
+        gap:30px;
+        color:rgba(0, 0, 0, 0.844);
+        /* width:30em; */
+        width:500px;
+        
+    }
+    .teamname{
+        font-family: badaboom2;
+        font-size: 50px;
+        text-align: center;
+        line-height: 40px;
+
+    }
+    .teamtime{
+        font-size: 200px;
+        margin-top:-40px;
+        text-align: center;
+        font-family: badaboomsolid;
+    }
+    .s{
+        font-size: 100px;
+        max-width:0px;
+    }
+    .t{
+
+    }
+
+    @keyframes zoomOut {
+        from {transform: scale(100%);}
+        to {transform: scale(65%);}
+    }
+
+    #team2text{
+    }
+
+    #team2text{
+    }
+
+
+
+
+    body,html{
+        height:100%;
+        width:100%;
+        padding:0;
+        border:0;
+        margin:0;
+    }
+
+    .colors{
+        display: flex;
+        flex-direction: row;
+        height:100%;
+        width:100%;
+    }
+    .teamcolor{
+        display: flex;
+        flex-grow:1;
+        height:100%;
+    }
+    #team1{
+        flex-grow:8;
+        background-color: rgb(255, 130, 251);
+    }
+    #team2{
+        flex-grow:12;
+        background-color: rgb(147, 255, 235);
+    }
+</style>
+
+
+<script>
+started=false
+
+tasks = ['press space to start...'];
+taskIndex = 0;
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
+(async()=>{
+    tasks = shuffle((await (await fetch('tasks!')).text()).split('\n'))
+    tasks.splice(tasks.findIndex((txt)=>txt.includes('pyramid'))+2,0,'upside down human pyramid.')
+    tasks.splice(tasks.findIndex((txt)=>txt.includes('pyramid'))+4,0,'human cyclone.')
+    tasks.splice(tasks.findIndex((txt)=>txt.includes('pyramid'))+6,0,'ok ur chillin this round you dont have to do anything')
+    tasks.splice(tasks.findIndex((txt)=>txt.includes('pyramid'))+8,0,'HUMAN PYRAMID AND THEN HUMAN CYCLONE')
+    console.log(tasks)
+})()
+
+    let team1seconds = document.getElementById('t1s')
+    let team2seconds = document.getElementById('t2s')
+    let team1text = document.getElementById('team1text')
+    let team2text = document.getElementById('team2text')
+    let team1color = document.getElementById('team1')
+    let team2color = document.getElementById('team2')
+    let tasktext = document.getElementById('tasktext')
+    tasktext.innerHTML = tasks[0]
+
+    let setup={
+        timeperteam:15,
+    }
+
+    let data={
+        timer:setup.timeperteam,
+        currentTeam1:true,
+        lastSwitch:Date.now()/1000,
+        lastSwitchTimer:setup.timeperteam
+    }
+
+    function tick() {
+        if(!started) {return}
+        data.timer=data.lastSwitchTimer+(Date.now()/1000-data.lastSwitch)*(data.currentTeam1 ? 1 : -1);
+        display()
+    }
+
+    function display() {
+        team1color.style.flexGrow = data.timer
+        team2color.style.flexGrow = setup.timeperteam*2-data.timer
+        team1seconds.innerHTML = Math.round(data.timer)
+        team2seconds.innerHTML = Math.round(setup.timeperteam*2-data.timer)
+
+         }
+
+    function swap() {
+        started=true;
+        data.lastSwitchTimer=data.timer;
+        data.lastSwitch=Date.now()/1000;
+        data.currentTeam1=!data.currentTeam1
+
+        taskIndex++;
+        tasktext.innerHTML = tasks[taskIndex%tasks.length]
+
+        setAnimations()
+    }
+    function setAnimations() {
+        let transpeed = '0.2s'
+        team1text.style.animation = ''
+        team2text.style.animation = ''
+        tasktext.style.animation = ''
+        team1text.offsetHeight; //trigger reflow
+        team2text.offsetHeight; //trigger reflow
+        tasktext.offsetHeight; //trigger reflow
+        team1text.style.animation = `zoomOut ${transpeed} ease-in-out 0s 1 ${data.currentTeam1 ? 'forwards' : 'reverse'}`
+        team2text.style.animation = `zoomOut ${transpeed} ease-in-out 0s 1 ${!data.currentTeam1 ? 'forwards' : 'reverse'}`
+        tasktext.style.animation = `${!data.currentTeam1 ? 'taskTeam1' : 'taskTeam2'} ${transpeed} ease-in-out 0s 1 forwards`
+    }
+
+    document.addEventListener('keydown',(e)=>{
+        if(e.key==' ') {
+            swap()
+        }
+    })
+    document.addEventListener('click',swap)
+
+
+    setInterval(tick,20)
+    setAnimations()
+    display()
+    data.currentTeam1=!data.currentTeam1
+
+</script>
