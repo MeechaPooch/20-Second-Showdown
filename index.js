@@ -1,6 +1,6 @@
 import express from 'express'
 let app = express()
 
-app.use(express.static('./static'))
+app.use(express.static('./docs'))
 
 app.listen(10000)
