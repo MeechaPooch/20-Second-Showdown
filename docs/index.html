@@ -244,6 +244,14 @@ function shuffle(array) {
         if(!started) {return}
         data.timer=data.lastSwitchTimer+(Date.now()/1000-data.lastSwitch)*(data.currentTeam1 ? 1 : -1);
         display()
+
+        if(data.timer<0 || data.timer>setup.timeperteam*2) {
+            started=false
+            data.timer=setup.timeperteam
+            data.currentTeam1=!data.currentTeam1
+            setAnimations()
+            data.currentTeam1=!data.currentTeam1
+        }
     }
 
     function display() {
